@@ -1,4 +1,4 @@
-package com.github.hetikk.bootstrap.controller;
+package com.github.hetikk.bootstrap.controller.user;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.hetikk.bootstrap.common.model.user.User;

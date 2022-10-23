@@ -7,6 +7,9 @@ POSTGRES_USER := bootstrap
 POSTGRES_PASSWORD := bootstrap
 POSTGRES_DB_NAME := bootstrap
 
+app-test:
+	mvn test
+
 env-start:
 	@ POSTGRES_IMAGE=$(POSTGRES_IMAGE) \
 	POSTGRES_CONTAINER=$(POSTGRES_CONTAINER) \
