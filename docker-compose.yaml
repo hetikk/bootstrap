@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  postgres:
+
+networks:
+  bootstrap-network:
+
+services:
+  postgres:
+    image: "${POSTGRES_IMAGE}"
+    container_name: "${POSTGRES_CONTAINER}"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB_NAME}"
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - bootstrap-network

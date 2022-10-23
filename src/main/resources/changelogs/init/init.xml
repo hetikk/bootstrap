@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <property name="users.table.name" value="users"/>
+    <property name="roles.table.name" value="roles"/>
+
+    <changeSet id="init-1" author="hetikk">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="${users.table.name}"/>
+            </not>
+        </preConditions>
+
+        <comment>Create users table</comment>
+
+        <createTable tableName="${users.table.name}">
+            <column name="id" autoIncrement="true" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="init-2" author="hetikk">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="${roles.table.name}"/>
+            </not>
+        </preConditions>
+
+        <comment>Create roles table</comment>
+
+        <createTable tableName="${roles.table.name}">
+            <column name="id" autoIncrement="true" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_user" referencedTableName="${users.table.name}" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
